@@ -5,30 +5,33 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private Long id;
+
     private String firstName;
     private String lastName;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date registeredAt;
+    private LocalDateTime registeredAt;
 
-    @PrePersist
-    protected void onCreate() {
-        registeredAt = new Date();
-    }
+    private int userStatus;
 
 
+
+    // Constructors, Getters, Setters, etc.
 }
+
